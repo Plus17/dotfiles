@@ -83,7 +83,20 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshrc="vim ~/.zshrc"
 alias phpProjects="cd /var/www/html/"
+alias :elixirp="cd ~/Elixir"
+alias :la-tasa="cd ~/Elixir/la-tasa"
+alias :el-serch="cd ~/Elixir/la-tasa-serch"
+alias :master="git checkout master"
+alias :status="git status"
+alias :add="git add"
+alias :commit="git commit -m"
+alias :checkout="git checkout "
+alias :branch="git branch"
+alias :nbranch="git checkout -b "
+alias :latasapull="git pull latasa master "
+alias :branchD="git branch -D "
 
 
 export NVM_DIR="$HOME/.nvm"
