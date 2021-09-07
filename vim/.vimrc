@@ -35,6 +35,7 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tomtom/tlib_vim'
 Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
 
 """" Git
 Plug 'airblade/vim-gitgutter'
@@ -88,8 +89,9 @@ let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclu
 
 """" fzf
 
-let mapleader = " "
+let mapleader = ","
 nnoremap <silent> <Leader><Space> :Files<CR>
+nmap <Leader><Space> :nohlsearch<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
