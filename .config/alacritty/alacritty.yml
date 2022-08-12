@@ -13,7 +13,7 @@ selection:
   save_to_clipboard: true
 
 mouse:
-  url:
+  hints:
     launcher:
       # This depends on your OS, on Mac it’s `open`
       program: open
@@ -41,11 +41,17 @@ cursor:
   style: Block
 
 font:
+  # The normal (roman) font face to use.
+  # Style can be specified to pick a specific face.
   normal:
-    # Needs to be powerline font if using zsh theme with powerline
-    family: Source Code Pro for Powerline
-  # Font size
-  size: 17
+    family: "Fira Code"
+    style: Retina
+    # family: "Fira Code"
+    # family: "Source Code Pro"
+    # style: Retina
+
+  # Point size of the font
+  size: 14.0
 
   # Better font rendering for mac
   use_thin_strokes: true
