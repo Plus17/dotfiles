@@ -71,7 +71,7 @@ plugins=(git tmux zsh-autosuggestions fast-syntax-highlighting asdf fnm)
 
 # User configuration
 # Open tmux on startup, requires tmux plugin
-ZSH_TMUX_AUTOSTART="true"
+# ZSH_TMUX_AUTOSTART="true"
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,11 +101,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias zshrc="vim ~/.zshrc"
-alias phpProjects="cd /var/www/html/"
-alias :elixirp="cd ~/Elixir"
-alias :la-tasa="cd ~/Elixir/la-tasa"
-alias :el-serch="cd ~/Elixir/la-tasa-serch"
+alias zshrc="nvim ~/.zshrc"
+alias :elixir="cd ~/Elixir"
+alias :ruby="cd ~/Elixir"
 
 # git alias
 alias :master="git checkout master"
@@ -142,7 +140,13 @@ alias :attach="tmux attach -t "
 
 alias :upserver="python -m SimpleHTTPServer 8000"
 
-# adds asdf to zsh
+function gacp() {
+  git add .
+  git commit -m "$1"
+  git push origin
+}
+
+# adds asdf to zsh, also manged by asdf zsh plugin
 #. $(brew --prefix asdf)/asdf.sh
 
 eval "$(fnm env --use-on-cd)"
