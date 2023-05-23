@@ -1,0 +1,44 @@
+alias zshrc="nvim ~/.zshrc"
+alias :elixir="cd ~/Elixir"
+alias :ruby="cd ~/Elixir"
+
+# git alias
+alias :master="git checkout master"
+alias :status="git status"
+alias :add="git add"
+alias :diff="git diff"
+alias :commit="git commit -m"
+alias :checkout="git checkout "
+alias :branch="git branch"
+alias :nbranch="git checkout -b "
+alias :latasapull="git pull latasa master "
+alias :pullupstream="git pull upstream "
+alias :pullorigin="git pull origin "
+alias :branchD="git branch -D "
+
+alias :gs="git status"
+alias :gadd="git add"
+alias :gcm="git commit -m"
+alias :gch="git checkout "
+alias :gb="git branch"
+alias :gnb="git checkout -b "
+alias :gbD="git branch -D "
+alias :greset="git reset HEAD~1"
+
+# alias makefiles for elixir projects
+alias :mt="make test"
+alias t="make test"
+alias ca="make check.all"
+
+# alias tmux
+alias :ntmux="tmux new -s dev"
+alias :detach="tmux detach"
+alias :attach="tmux attach -t "
+
+alias :upserver="python -m SimpleHTTPServer 8000"
+
+function gacp() {
+  git add .
+  git commit -m "$1"
+  git push origin
+}

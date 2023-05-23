@@ -11,9 +11,6 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# LunarVim
-export PATH=$PATH:~/.local/bin
-
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -101,50 +98,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias zshrc="nvim ~/.zshrc"
-alias :elixir="cd ~/Elixir"
-alias :ruby="cd ~/Elixir"
-
-# git alias
-alias :master="git checkout master"
-alias :status="git status"
-alias :add="git add"
-alias :diff="git diff"
-alias :commit="git commit -m"
-alias :checkout="git checkout "
-alias :branch="git branch"
-alias :nbranch="git checkout -b "
-alias :latasapull="git pull latasa master "
-alias :pullupstream="git pull upstream "
-alias :pullorigin="git pull origin "
-alias :branchD="git branch -D "
-
-alias :gs="git status"
-alias :gadd="git add"
-alias :gcm="git commit -m"
-alias :gch="git checkout "
-alias :gb="git branch"
-alias :gnb="git checkout -b "
-alias :gbD="git branch -D "
-alias :greset="git reset HEAD~1"
-
-# alias makefiles for elixir projects
-alias :mt="make test"
-alias t="make test"
-alias ca="make check.all"
-
-# alias tmux
-alias :ntmux="tmux new -s dev"
-alias :detach="tmux detach"
-alias :attach="tmux attach -t "
-
-alias :upserver="python -m SimpleHTTPServer 8000"
-
-function gacp() {
-  git add .
-  git commit -m "$1"
-  git push origin
-}
+source $HOME/.aliases
 
 # adds asdf to zsh, also manged by asdf zsh plugin
 #. $(brew --prefix asdf)/asdf.sh
@@ -155,3 +109,7 @@ eval "$(fnm env --use-on-cd)"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+export DISABLE_SPRING=true
+alias python=/usr/bin/python3
