@@ -1,26 +1,29 @@
-" Specify a directory for plugins
-" - For Neovim: stdpath('data') . '/plugged'
-" - Avoid using standard Vim directory names like 'plugin'
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let data_dir = '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin()
 
 """" Files Navigation
-Plug 'scrooloose/nerdtree'
 Plug 'kien/ctrlp.vim'
+Plug 'Asheq/close-buffers.vim'
+Plug 'duggiefresh/vim-easydir'
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+"""" Languages
+Plug 'sheerun/vim-polyglot'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'dense-analysis/ale'
 
-Plug 'dyng/ctrlsf.vim'
-
-"""" Elixir
-Plug 'elixir-editors/vim-elixir'
-Plug 'mhinz/vim-mix-format'
-Plug 'slashmili/alchemist.vim'
+""" LSP
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'mattn/vim-lsp-settings'
 
 """" Visual
 Plug 'vim-airline/vim-airline'
@@ -29,26 +32,24 @@ Plug 'Yggdroot/indentLine'
 Plug 'kien/rainbow_parentheses.vim'
 
 """" Code
-Plug 'Raimondi/delimitMate'
-Plug 'garbas/vim-snipmate'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'honza/vim-snippets'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
+Plug 'tmsvg/pear-tree'
+Plug 'ervandew/supertab'
+Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-endwise'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 """" Git
 Plug 'airblade/vim-gitgutter'
-
-"""" Other
-Plug 'duggiefresh/vim-easydir'
 
 """" Themes
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 " Initialize plugin system
 call plug#end()
+
 set updatetime=100
+
 " " Enables filetype detection, loads ftplugin, and loads indent
 " " (Not necessary on nvim and may not be necessary on vim 8.2+)
 filetype plugin indent on
@@ -57,29 +58,47 @@ filetype plugin indent on
 " Plugins Conf
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"""" ctrlspace
+"""" Ale
+let g:ale_linters = {
+	\ 'elixir': ['elixir_ls'],
+	\ 'ruby': ['standardb']
+	\ }
 
-" set nocompatible
-" set hidden
-" set encoding=utf-8
-" set showtabline=0 " disable ctrlspace tab line
+""" CloseTag
+let g:closetag_filenames = '*.html,*.xml,*.html.erb,*.html.heex,*.html.leex,*.html.eex'
+let g:closetag_closetag_emptyTags_caseSensitive = 1
 
-" nnoremap <silent><C-p> :CtrlSpace O<CR> " do not interfere with ctrl + p
+""" LSP
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
 
-"""" NERDTree
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> <leader>rn <plug>(lsp-rename)
+    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
+endfunction
 
-" NERDTreeToggle to Ctrl+n
-map <C-n> :NERDTreeToggle<CR>
-
-"""" Ctrl sf
-
-nmap     <C-F>f <Plug>CtrlSFPrompt
-nmap     <C-F>n <Plug>CtrlSFCwordPath
-nmap     <C-F>p <Plug>CtrlSFPwordPath
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
 
 """" vim-airline
 
 " vim airline, display all buffers when there's only one tab open
+let g:airline_powerline_fonts = 0
+let g:airline_theme='term'
 let g:airline#extensions#tabline#enabled = 1
 
 """" ctrlp
@@ -87,33 +106,34 @@ let g:airline#extensions#tabline#enabled = 1
 " exclude ignored files
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
-"""" fzf
-
-let mapleader = ","
-nnoremap <silent> <Leader><Space> :Files<CR>
-nmap <Leader><Space> :nohlsearch<CR>
+"""" close buffers
+nnoremap <silent> <C-q> :Bdelete menu<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """" move between buffers
 
-nnoremap <silent> C] :bnext<CR>
-nnoremap <silent> C[ :bprev<CR>
 nnoremap <C-w> :bd<CR> " close current buffer
 nmap <C-s> :w<CR> " save current buffer
 nmap <C-o> O<Esc> " insert newline without entering insert mode
-nmap <C-b> :MixFormat<CR> " format current elixir file
 
 """" move between buffers
 
-nnoremap <silent> [b :bprevious<cr>
-nnoremap <silent> ]b :bnext<cr>
-nnoremap <silent> [B :bfirst<cr>
-nnoremap <silent> ]B :blast<cr>
+" nnoremap <silent> [b :bprevious<cr>
+" nnoremap <silent> ]b :bnext<cr>
+" nnoremap <silent> [B :bfirst<cr>
+" nnoremap <silent> ]B :blast<cr>
+" nnoremap <silent> C] :bnext<CR>
+" nnoremap <silent> C[ :bprev<CR>
+
+nmap <C-[> :bnext<CR>
+nmap <C-]> :bprev<CR>
+
+tnoremap <Esc><Esc> <C-\><C-n>
 
 """" easy window navigation between splits
-
+nnoremap ,v :vsplit<CR>
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
@@ -127,42 +147,62 @@ inoremap <ALT-k> <Esc>:m .-2<CR>==gi
 vnoremap <ALT-j> :m '>+1<CR>gv=gv
 vnoremap <ALT-k> :m '<-2<CR>gv=gv
 
+let mapleader = ","
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim Conf
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Stop acting like classic vi
+set history=1000
+
+" Settings about files
+set encoding=utf-8
+scriptencoding utf-8
+filetype indent plugin on
+set autoindent  " always set autoindenting on
+set tabstop=2 " a tab is two spaces
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set hidden
+
+" git manage this
+set noswapfile
+set nobackup
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Visual
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set fillchars+=vert:\┊
+set noshowmode
+set laststatus=1
+set wildmenu
+set wildoptions=pum
 
-""""  General
+set mouse=a
 
-syntax on " Enable syntax highlighting
+" Enable syntax highlighting
+syntax on
 syntax enable
 set background=dark
 colorscheme dracula
 
 set guifont=Fira\ Code:h18
+set nowrap
 set number
+set showmatch
 
 set laststatus=2 " always show powerline
 
-""""  Indenting
-
-set tabstop=2 " a tab is two spaces
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
 
 set pastetoggle=<F2> " Use F2 when pasting to avoid applying indents
 
-set autoindent    " always set autoindenting on
 set copyindent    " copy the previous indentation on autoindenting
 set smartindent
 set expandtab
 
 set shiftwidth=2  " number of spaces to use for autoindenting
 set showmatch     " set show matching parenthesis
-
-"""" Search
-
-set hlsearch      " highlight search terms
-set incsearch     " show search matches as you type
 
 """" Auto-Commands
 
