@@ -127,8 +127,8 @@ nmap <C-o> O<Esc> " insert newline without entering insert mode
 " nnoremap <silent> C] :bnext<CR>
 " nnoremap <silent> C[ :bprev<CR>
 
-nmap <C-[> :bnext<CR>
-nmap <C-]> :bprev<CR>
+nmap <C-]> :bnext<CR>
+nmap <C-[> :bprev<CR>
 
 tnoremap <Esc><Esc> <C-\><C-n>
 
