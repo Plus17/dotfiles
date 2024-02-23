@@ -188,6 +188,7 @@ Temporary Items
 
 ### VisualStudioCode ###
 .vscode/*
+.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -211,5 +212,7 @@ Temporary Items
 # Ignore code-workspaces
 *.code-workspace
 
+# Zed
+.zed/*
+
 # End of https://www.toptal.com/developers/gitignore/api/elixir,visualstudiocode,intellij,macos,phoenix
-*
