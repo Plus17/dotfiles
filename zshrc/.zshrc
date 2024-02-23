@@ -142,8 +142,6 @@ eval "$(fnm env --use-on-cd)"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export DISABLE_SPRING=true
 alias python=/usr/bin/python3
