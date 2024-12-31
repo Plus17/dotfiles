@@ -1,9 +1,9 @@
 import = [
   # uncomment the flavour you want below:
-  # "~/.config/alacritty/catppuccin-latte.toml",
-  # "~/.config/alacritty/catppuccin-frappe.toml"
-  # "~/.config/alacritty/catppuccin-macchiato.toml"
-  "~/.config/alacritty/catppuccin-mocha.toml"
+  # "~/.config/alacritty/catppuccin/catppuccin-latte.toml",
+  # "~/.config/alacritty/catppuccin/catppuccin-frappe.toml"
+  "~/.config/alacritty/catppuccin/catppuccin-macchiato.toml"
+  # "~/.config/alacritty/catppuccin/catppuccin-mocha.toml"
 ]
 
 [env]
@@ -18,12 +18,14 @@ style = "Bold"
 
 [font.normal]
 family = "FiraCode Nerd Font"
-style = "SemiBold"
+style = "Retina"
 
 [selection]
 save_to_clipboard = true
 semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
 
 [window]
+decorations = "buttonless"
+dynamic_padding = false
 opacity = 1
 option_as_alt = "Both"
