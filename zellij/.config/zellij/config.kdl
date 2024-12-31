@@ -1,0 +1,14 @@
+pane_frames false
+
+theme "catppuccin-macchiato"
+
+default_layout "compact"
+
+mouse_mode false
+
+layout {
+    tab // a tab with a single pane
+    tab // a tab with a single pane
+    tab // a tab with a single pane
+    tab // a tab with a single pane
+}
