@@ -58,7 +58,7 @@ ZSH_THEME="avit"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux zsh-autosuggestions fast-syntax-highlighting asdf fnm)
+plugins=(git tmux zsh-autosuggestions fast-syntax-highlighting asdf fnm kubectl zoxide bundler fzf terraform)
 
 # User configuration
 # Open tmux on startup, requires tmux plugin
