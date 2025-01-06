@@ -215,4 +215,7 @@ Temporary Items
 # Zed
 .zed/*
 
+# vim-projectionist
+.projections.json
+
 # End of https://www.toptal.com/developers/gitignore/api/elixir,visualstudiocode,intellij,macos,phoenix
