@@ -17,6 +17,7 @@ telescope.setup {
       },
     },
   },
+  
   extensions = {
     file_browser = {
       theme = "dropdown",

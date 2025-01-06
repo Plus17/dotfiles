@@ -3,8 +3,9 @@ lsp.preset('recommended')
 
 lsp.ensure_installed({
   -- Replace these with whatever servers you want to install
-  "sumneko_lua",
-  "elixirls",
+  "lua-language-server",
+  "elixir-ls",
+  "ruby-lsp",
 })
 
 -- Configure lua language server for neovim
