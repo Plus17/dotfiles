@@ -1,14 +1,17 @@
-require("plus17.settings")
-require("plus17.keymaps")
-require("plus17.packer")
-require("plus17.colors")
-require("plus17.treesitter")
-require("plus17.telescope")
-require("plus17.bufferline")
-require("plus17.lualine")
-require("plus17.indentline")
-require("plus17.autopairs")
-require("plus17.fileexplorer")
-require("plus17.comment")
-require("plus17.gitsigns")
-require("plus17.lsp")
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+vim.g.copilot_filetypes = {markdown = true}
+
+require("vim-options")
+require("keymaps")
+require("lazy").setup("plugins")
