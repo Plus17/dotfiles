@@ -8,7 +8,7 @@ tap "homebrew/cask"
 # Terminal
 cask "ghostty"
 cask "alacritty"
-brew "zellij"
+brew "tmux"
 brew "zsh"
 brew "antidote"
 
@@ -30,10 +30,12 @@ brew "wget"
 brew "zoxide"      # cd alternative
 
 # Dev tools
+cask "docker"
 brew "neovim"
 cask "zed"
 brew "kubernetes-cli"
-brew "kubectx"
+brew "kubectx"         # kubectl context manager
+brew "kube-ps1"        # kubectl prompt
 brew "gh"
 brew "mise"
 brew "jesseduffield/lazygit/lazygit"
