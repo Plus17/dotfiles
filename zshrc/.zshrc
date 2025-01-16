@@ -1,6 +1,13 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# Load antidote plugin manager
+# source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+
+# # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
+# antidote load
+
+# antigen theme spaceship-prompt/spaceship-prompt
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -58,7 +65,7 @@ ZSH_THEME="avit"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git tmux zsh-autosuggestions fast-syntax-highlighting asdf fnm kubectl zoxide bundler fzf terraform)
+plugins=(git tmux zsh-autosuggestions fast-syntax-highlighting asdf fnm kubectl zoxide bundler fzf terraform kube-ps1)
 
 # User configuration
 # Open tmux on startup, requires tmux plugin
@@ -66,6 +73,7 @@ plugins=(git tmux zsh-autosuggestions fast-syntax-highlighting asdf fnm kubectl 
 
 source $ZSH/oh-my-zsh.sh
 
+PROMPT='$(kube_ps1)'$PROMPT # or RPROMPT='$(kube_ps1)'
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -136,3 +144,9 @@ eval "$(fnm env --use-on-cd)"
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export DISABLE_SPRING=true
 alias python=/usr/bin/python3
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/plus/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/plus/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/plus/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/plus/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
