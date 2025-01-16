@@ -3,7 +3,12 @@
 	email =
 
 [core]
+    editor = nvim
+    excludesfile = ~/.gitignore_global
     pager = delta
+
+[push]
+    default = current
 
 [interactive]
     diffFilter = delta --color-only
